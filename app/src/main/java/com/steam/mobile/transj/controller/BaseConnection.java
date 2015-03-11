@@ -1,4 +1,4 @@
-package com.steam.mobile.transj.service;
+package com.steam.mobile.transj.controller;
 
 import android.content.Context;
 
@@ -16,7 +16,7 @@ import retrofit.client.OkClient;
  */
 public class BaseConnection {
 
-    private Context context;
+    protected Context context;
     private OkHttpClient okHttpClient;
     private RestAdapter adapter;
 

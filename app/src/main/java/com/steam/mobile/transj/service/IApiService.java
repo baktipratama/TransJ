@@ -13,5 +13,8 @@ import rx.Observable;
 public interface IApiService {
 
     @GET("/its/master_halte/{id}")
-    public Observable<Data<Station>> getListStation(@Path("id") int id);
+    public Observable<Data<Station>> getListStation(@Path("id") String id);
+
+    @GET("/its/master_halte/{id}")
+    public Data<Station> getSynchListStation(@Path("id") String id);
 }

@@ -1,4 +1,4 @@
-package com.steam.mobile.transj.controller;
+package com.steam.mobile.transj.service;
 
 import android.content.Context;
 

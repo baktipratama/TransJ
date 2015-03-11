@@ -15,7 +15,6 @@ import com.steam.mobile.transj.response.IResponse;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
 /**
  * Created by heriman on 3/11/15.
@@ -23,7 +22,6 @@ import java.util.logging.Handler;
 public class HalteFragment extends BaseFragment {
     HalteController halteController;
     ListView lvData;
-    Handler handler;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         halteController = HalteController.getInstance(getActivity().getApplicationContext());

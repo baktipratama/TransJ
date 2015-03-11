@@ -4,6 +4,7 @@ import com.steam.mobile.transj.model.Data;
 import com.steam.mobile.transj.model.Station;
 
 import retrofit.http.GET;
+import retrofit.http.Path;
 import rx.Observable;
 
 /**
@@ -11,6 +12,6 @@ import rx.Observable;
  */
 public interface IApiService {
 
-    @GET("/its/master_halte/4")
-    public Observable<Data<Station>> getListStation();
+    @GET("/its/master_halte/{id}")
+    public Observable<Data<Station>> getListStation(@Path("id") int id);
 }

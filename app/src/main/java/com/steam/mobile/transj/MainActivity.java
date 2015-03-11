@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
             public void onFinish() {
 
             }
-        });
+        },4);
     }
 
     @Override

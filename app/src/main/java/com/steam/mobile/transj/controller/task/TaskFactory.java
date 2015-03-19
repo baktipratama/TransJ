@@ -13,4 +13,9 @@ public class TaskFactory implements ITaskFactory {
         return new RetrieveAllHalteTask(callback,context);
     }
 
+    @Override
+    public AsynchronousTask createRetrieveAllIncomingTask(IResponse callback, Context context, String koridor, String id) {
+        return new RetrieveAllIncoming(callback,context,koridor,id);
+    }
+
 }

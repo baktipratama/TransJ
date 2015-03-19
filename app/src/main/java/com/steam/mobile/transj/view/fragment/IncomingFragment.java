@@ -1,6 +1,5 @@
 package com.steam.mobile.transj.view.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,23 +10,27 @@ import android.widget.Toast;
 
 import com.steam.mobile.transj.R;
 import com.steam.mobile.transj.controller.HalteController;
+import com.steam.mobile.transj.controller.IncomingController;
+import com.steam.mobile.transj.model.Incoming;
 import com.steam.mobile.transj.model.Station;
 import com.steam.mobile.transj.response.IResponse;
-import com.steam.mobile.transj.view.IncomingActivity;
 import com.steam.mobile.transj.view.adapter.HalteArrayAdapter;
+import com.steam.mobile.transj.view.adapter.IncomingArrayAdapter;
 
 import java.util.List;
 
 /**
- * Created by heriman on 3/11/15.
+ * Created by bakti on 3/19/15.
  */
-public class HalteFragment extends BaseFragment {
-    HalteController halteController;
-    ListView lvData;
+public class IncomingFragment extends BaseFragment {
+    private IncomingController incomingController;
+    private ListView lvData;
+    private Station s;
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        halteController = HalteController.getInstance(getActivity().getApplicationContext());
         super.onCreate(savedInstanceState);
+        incomingController = IncomingController.getInstance(getActivity().getApplicationContext());
+        s = (Station)getActivity().getIntent().getExtras().get("station");
     }
 
     @Override
@@ -38,9 +41,7 @@ public class HalteFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Station station = (Station)parent.getItemAtPosition(position);
-                Intent i = new Intent(getActivity().getBaseContext(), IncomingActivity.class);
-                i.putExtra("station",station);
-                getActivity().startActivity(i);
+                Toast.makeText(getActivity().getApplicationContext(), station.getHalteId(), Toast.LENGTH_LONG).show();
             }
         });
         loadAllData();
@@ -49,11 +50,11 @@ public class HalteFragment extends BaseFragment {
 
     public void loadAllData(){
         showProgressDialog("Load Halte","Loading");
-        halteController.getAllHalte(new IResponse() {
+        incomingController.getAllIncoming(new IResponse() {
             @Override
             public void onSuccess(Object o) {
                 dismissProgressDialog();
-                setAdapter(new HalteArrayAdapter(getActivity().getBaseContext(), (List<Station>) o));
+                setAdapter(new IncomingArrayAdapter(getActivity().getBaseContext(), (List<Incoming>) o));
             }
 
             @Override
@@ -67,9 +68,9 @@ public class HalteFragment extends BaseFragment {
             public void onFinish() {
 
             }
-        });
+        }, s.getKoridor(), s.getHalteId());
     }
-    public void setAdapter(HalteArrayAdapter adapter){
+    public void setAdapter(IncomingArrayAdapter adapter){
         lvData.setAdapter(adapter);
     }
 }

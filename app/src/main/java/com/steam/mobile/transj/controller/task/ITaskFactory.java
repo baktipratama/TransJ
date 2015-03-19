@@ -9,4 +9,5 @@ import com.steam.mobile.transj.response.IResponse;
  */
 public interface ITaskFactory {
     public AsynchronousTask createRetrieveAllHalteTask(IResponse callback, Context context);
+    public AsynchronousTask createRetrieveAllIncomingTask(IResponse callback, Context context, String koridor, String id);
 }

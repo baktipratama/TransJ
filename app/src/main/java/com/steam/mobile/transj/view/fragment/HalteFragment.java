@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import com.steam.mobile.transj.R;
 import com.steam.mobile.transj.controller.HalteController;
 import com.steam.mobile.transj.model.Station;
 import com.steam.mobile.transj.response.IResponse;
+import com.steam.mobile.transj.view.adapter.HalteArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,13 @@ public class HalteFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
         lvData = (ListView) root.findViewById(R.id.lvData);
+        lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Station station = (Station)parent.getItemAtPosition(position);
+                Toast.makeText(getActivity().getApplicationContext(),station.getHalteId(),Toast.LENGTH_LONG).show();
+            }
+        });
         loadAllData();
         return root;
     }
@@ -42,12 +51,7 @@ public class HalteFragment extends BaseFragment {
             @Override
             public void onSuccess(Object o) {
                 dismissProgressDialog();
-                List<Station> data = (List<Station>) o;
-                ArrayList<String> list = new ArrayList<String>();
-                for (Station s : data) {
-                    list.add(s.getHalteName());
-                }
-                setAdapter(list);
+                setAdapter(new HalteArrayAdapter(getActivity().getBaseContext(), (List<Station>) o));
             }
 
             @Override
@@ -63,9 +67,7 @@ public class HalteFragment extends BaseFragment {
             }
         });
     }
-    public void setAdapter(ArrayList<String> list){
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1, list);
+    public void setAdapter(HalteArrayAdapter adapter){
         lvData.setAdapter(adapter);
-
     }
 }

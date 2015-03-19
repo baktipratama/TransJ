@@ -14,8 +14,18 @@ public class Station implements Serializable {
     @SerializedName("HalteName")
     private String halteName;
 
+    private String koridor;
+
     public String getHalteId() {
         return halteId;
+    }
+
+    public String getKoridor() {
+        return koridor;
+    }
+
+    public void setKoridor(String koridor) {
+        this.koridor = koridor;
     }
 
     public void setHalteId(String halteId) {

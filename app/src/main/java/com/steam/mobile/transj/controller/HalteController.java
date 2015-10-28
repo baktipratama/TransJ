@@ -11,6 +11,7 @@ import com.steam.mobile.transj.response.IResponse;
  */
 public class HalteController {
 
+    //TODO Need injection here
     private static HalteController instance;
     private ITaskFactory taskFactory;
     private Context context;

@@ -31,6 +31,8 @@ public class IncomingArrayAdapter extends ArrayAdapter<Incoming> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.row_halte, parent, false);
+        TextView tvTitle= (TextView) rowView.findViewById(R.id.tvTitle);
+        tvTitle.setText(list.get(position).getHalteName());
         return rowView;
     }
 }
